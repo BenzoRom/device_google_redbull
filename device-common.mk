@@ -105,7 +105,6 @@ BOARD_SHIPPING_API_LEVEL := 30
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
     $(LOCAL_PATH)/fstab.hardware:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.$(PRODUCT_PLATFORM) \
     $(LOCAL_PATH)/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_PLATFORM) \
     $(LOCAL_PATH)/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist \
@@ -954,9 +953,9 @@ endif
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.support_one_handed_mode=true
 
-# Enable Incremental on the device via kernel module
+# Enable Incremental on the device
 PRODUCT_PROPERTY_OVERRIDES += \
-        ro.incremental.enable=module:/vendor/lib/modules/incrementalfs.ko
+        ro.incremental.enable=yes
 
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
