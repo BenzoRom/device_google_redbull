@@ -528,6 +528,12 @@ on property:init.svc.vendor.charger=running
 on property:sys.boot_completed=1
     setprop vendor.setup.power 1
 
+    # Disable suspend clock/regulator reporting
+    write /sys/kernel/debug/clk/debug_suspend 0
+
+    # Disable filesystem sync on suspend
+    write /sys/power/sync_on_suspend 0
+
     # Runtime fs tuning
     write /sys/block/sda/queue/read_ahead_kb 128
     write /sys/block/sda/queue/nr_requests 128
