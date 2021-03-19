@@ -61,21 +61,16 @@ on early-init && property:ro.boot.mode=charger
     start charger_insmod_sh
 
 on init && property:vendor.skip.init=0
-    # Boot time cpuset and stune
+    # Boot time cpuset and uclamp
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/background/cpus 0-5
     write /dev/cpuset/system-background/cpus 0-5
     write /dev/cpuset/restricted/cpus 2-5
-    write /dev/stune/foreground/schedtune.prefer_idle 1
-    write /dev/stune/foreground/schedtune.prefer_high_cap 1
-    write /dev/stune/foreground/schedtune.boost 100
-    write /dev/stune/schedtune.prefer_idle 1
-    write /dev/stune/schedtune.prefer_high_cap 1
-    write /dev/stune/schedtune.boost 100
-    write /dev/stune/top-app/schedtune.prefer_idle 1
-    write /dev/stune/top-app/schedtune.prefer_high_cap 1
-    write /dev/stune/top-app/schedtune.boost 100
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/foreground/cpu.uclamp.min max
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/top-app/cpu.uclamp.min max
 
     # Boot time fs tuning
     write /sys/block/sda/queue/iostats 0
@@ -130,12 +125,8 @@ on init && property:vendor.skip.init=0
     # Some user code relies on ro.boot.hardware.revision
     setprop ro.boot.hardware.revision ${ro.revision}
 
-    mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus 0-7
     write /dev/cpuset/camera-daemon/mems 0
-    chown system system /dev/cpuset/camera-daemon
-    chown system system /dev/cpuset/camera-daemon/tasks
-    chmod 0664 /dev/cpuset/camera-daemon/tasks
 
     mkdir /dev/cpuset/camera-daemon-dedicated
     write /dev/cpuset/camera-daemon-dedicated/cpus 0-7
@@ -144,13 +135,9 @@ on init && property:vendor.skip.init=0
     chown system system /dev/cpuset/camera-daemon-dedicated/tasks
     chmod 0664 /dev/cpuset/camera-daemon-dedicated/tasks
 
-    # create an stune group for camera-specific processes
-    mkdir /dev/stune/camera-daemon
-    write /dev/stune/camera-daemon/schedtune.prefer_idle 1
-    write /dev/stune/camera-daemon/schedtune.boost 0
-    chown system system /dev/stune/camera-daemon
-    chown system system /dev/stune/camera-daemon/tasks
-    chmod 0664 /dev/stune/camera-daemon/tasks
+    # create an uclamp group for camera-specific processes
+    write /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/camera-daemon/cpu.uclamp.min 0
 
     # Allow PAI targeting per hardware SKU
     setprop ro.oem.key1 ${ro.boot.hardware.sku}
@@ -568,16 +555,11 @@ on property:sys.boot_completed=1
     write /dev/cpuset/system-background/cpus 2-5
     write /dev/cpuset/restricted/cpus 2-5
 
-    # Setup runtime schedTune
-    write /dev/stune/foreground/schedtune.prefer_idle 1
-    write /dev/stune/foreground/schedtune.prefer_high_cap 0
-    write /dev/stune/foreground/schedtune.boost 0
-    write /dev/stune/schedtune.prefer_idle 0
-    write /dev/stune/schedtune.prefer_high_cap 0
-    write /dev/stune/schedtune.boost 0
-    write /dev/stune/top-app/schedtune.prefer_idle 1
-    write /dev/stune/top-app/schedtune.prefer_high_cap 0
-    write /dev/stune/top-app/schedtune.boost 10
+    # Setup runtime uclamp
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/foreground/cpu.uclamp.min 0
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/top-app/cpu.uclamp.min 10
 
     # Setup runtime blkio
     # value for group_idle is us
