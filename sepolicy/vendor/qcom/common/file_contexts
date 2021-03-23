@@ -78,6 +78,9 @@
 /(vendor|system/vendor)/bin/adpl                u:object_r:adpl_exec:s0
 /(vendor|system/vendor)/bin/ssgtzd              u:object_r:ssgtzd_exec:s0
 /(vendor|system/vendor)/bin/feature_enabler_client              u:object_r:feature_enabler_client_exec:s0
+/(vendor|system/vendor)/bin/mutualex            u:object_r:mutualex_exec:s0
+/(vendor|system/vendor)/bin/qmipriod            u:object_r:qmipriod_exec:s0
+/(vendor|system/vendor)/bin/tlocd               u:object_r:tlocd_exec:s0
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0

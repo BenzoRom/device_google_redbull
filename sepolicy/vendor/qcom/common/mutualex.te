@@ -1,0 +1,6 @@
+type mutualex, domain;
+type mutualex_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(mutualex)
+
+wakelock_use(mutualex)
+allow mutualex self:qipcrtr_socket create;
