@@ -66,3 +66,7 @@ allow netmgrd qmipriod:unix_stream_socket connectto;
 
 #Ignore if device loading for private IOCTL failed
 dontaudit netmgrd kernel:system module_request;
+
+# rmnet_perf
+allow netmgrd sysfs_rmnet_perf:dir r_dir_perms;
+allow netmgrd sysfs_rmnet_perf:file rw_file_perms;
