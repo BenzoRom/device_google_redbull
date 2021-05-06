@@ -2,8 +2,12 @@ type qmipriod, domain;
 type qmipriod_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(qmipriod)
 
-allow qmipriod qmipriod:qipcrtr_socket { getattr create };
+allow qmipriod qmipriod:qipcrtr_socket { getattr create read write setopt };
+allow qmipriod self:qipcrtr_socket { getattr create read write setopt };
 allow qmipriod netmgrd_socket:dir { search read write add_name };
 allow qmipriod netmgrd_socket:sock_file create;
-allow qmipriod sysfs_msm_subsys:dir search;
+allow qmipriod sysfs_soc:file { getattr };
+search_dir_read_file(qmipriod, sysfs_soc)
+search_dir_read_file(qmipriod, sysfs_ssr)
+allow qmipriod sysfs_msm_subsys:dir { search read open };
 allow qmipriod vendor_data_file:file { create rw_file_perms };
