@@ -255,12 +255,9 @@ TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_SOURCE := kernel/google/redbull
 TARGET_KERNEL_CONFIG := benzo_defconfig
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CLANG_VERSION := clang-benzo
-TARGET_KERNEL_USE_LLD := true
+TARGET_KERNEL_USE_LLVM_IAS := true
 TARGET_KERNEL_ADDITIONAL_FLAGS := \
-    LLVM=1 \
-    LLVM_IAS=1 \
     DTC_EXT=$(shell pwd)/prebuilts/kernel-build-tools/$(HOST_PREBUILT_TAG)/bin/dtc
 
 # DTBO partition definitions
