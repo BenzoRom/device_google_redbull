@@ -156,7 +156,6 @@
         "0",
         "10",
         "30",
-        "45",
         "max"
       ],
       "DefaultIndex": 1,
@@ -168,7 +167,7 @@
       "Values": [
         "0",
         "5",
-        "35",
+        "50",
         "max"
       ],
       "DefaultIndex": 0,
@@ -525,7 +524,7 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "uClampBoost_TA",
-      "Duration": 5000,
+      "Duration": 0,
       "Value": "30"
     },
     {
@@ -568,7 +567,7 @@
       "PowerHint": "LAUNCH",
       "Node": "uClampBoost_TA",
       "Duration": 5000,
-      "Value": "45"
+      "Value": "max"
     },
     {
       "PowerHint": "LAUNCH",
@@ -724,7 +723,7 @@
       "PowerHint": "CAMERA_LAUNCH",
       "Node": "uClampBoost_CD",
       "Duration": 1000,
-      "Value": "35"
+      "Value": "max"
     },
     {
       "PowerHint": "CAMERA_LAUNCH",
@@ -1186,7 +1185,7 @@
       "PowerHint": "CAMERA_SHOT",
       "Node": "uClampBoost_CD",
       "Duration": 1000,
-      "Value": "35"
+      "Value": "50"
     },
     {
       "PowerHint": "CAMERA_SHOT",
