@@ -68,7 +68,6 @@ on init && property:vendor.skip.init=0
     write /dev/cpuset/system-background/cpus 0-5
     write /dev/cpuset/restricted/cpus 2-5
     write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
-    write /dev/cpuctl/foreground/cpu.uclamp.min max
     write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
     write /dev/cpuctl/top-app/cpu.uclamp.min max
 
@@ -556,10 +555,11 @@ on property:sys.boot_completed=1
     write /dev/cpuset/restricted/cpus 2-5
 
     # Setup runtime uclamp
-    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
-    write /dev/cpuctl/foreground/cpu.uclamp.min 0
+    write /proc/sys/kernel/sched_util_clamp_min 0
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 0
     write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
-    write /dev/cpuctl/top-app/cpu.uclamp.min 10
+    write /dev/cpuctl/top-app/cpu.uclamp.min 30
 
     # Setup runtime blkio
     # value for group_idle is us
