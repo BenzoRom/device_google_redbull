@@ -1,2 +1,5 @@
+allow hal_fingerprint sysfs_rtc:dir search;
+allow hal_fingerprint sysfs_rtc:file r_file_perms;
+
 dontaudit hal_fingerprint_default sysfs_msm_subsys:dir search;
 dontaudit hal_fingerprint_default sysfs_msm_subsys:file r_file_perms;
