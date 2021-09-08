@@ -843,7 +843,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 endif
 
 # Enable iwlan service logging for debug
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_PROPERTY_OVERRIDES += persist.vendor.iwlan.logging.logcat=true
 endif
 
@@ -945,7 +945,7 @@ PRODUCT_PACKAGES += \
     android.hardware.rebootescrow-service.citadel
 
 # Vendor verbose logging default property
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.verbose_logging_enabled=true
 else

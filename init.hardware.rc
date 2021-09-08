@@ -517,6 +517,9 @@ on property:sys.boot_completed=1
     # Disable suspend clock/regulator reporting
     write /sys/kernel/debug/clk/debug_suspend 0
 
+    # Disable binder debug mask
+    write /sys/module/binder/parameters/debug_mask 0
+
     # Disable filesystem sync on suspend
     write /sys/power/sync_on_suspend 0
 
